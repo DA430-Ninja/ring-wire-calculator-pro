@@ -49,7 +49,7 @@ const WireCalculator = () => {
   const handleInputChange = (field: keyof CalculationInputs, value: string | number) => {
     setInputs(prev => ({
       ...prev,
-      [field]: typeof value === 'string' ? value : parseFloat(value.toString()) || 0
+      [field]: parseFloat(value.toString()) || 0
     }));
   };
 
