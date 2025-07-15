@@ -46,14 +46,32 @@ const WireCalculator = () => {
     }
   }, [inputs]);
 
-  const handleInputChange = (field: keyof CalculationInputs, value: string | number) => {
-    setInputs(prev => ({
-      ...prev,
-      [field]: parseFloat(value.toString()) || 0
-    }));
+  const brandHeights = {
+    'lifetime': 30,
+    'godrej': 25,
+    'higloss': 50,
+    'pluss': 30
   };
 
-  const brands = ['Godrej', 'Lifetime', 'Higloss', 'Plus'];
+  const handleInputChange = (field: keyof CalculationInputs, value: string | number) => {
+    if (field === 'brand') {
+      const brandKey = value.toString().toLowerCase();
+      const ringHeight = brandHeights[brandKey as keyof typeof brandHeights];
+      
+      setInputs(prev => ({
+        ...prev,
+        brand: value.toString(),
+        bendHeight: ringHeight || prev.bendHeight
+      }));
+    } else {
+      setInputs(prev => ({
+        ...prev,
+        [field]: parseFloat(value.toString()) || 0
+      }));
+    }
+  };
+
+  const brands = ['Godrej', 'Lifetime', 'Higloss', 'Pluss'];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-4">
@@ -94,6 +112,11 @@ const WireCalculator = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                {inputs.brand && (
+                  <p className="text-xs text-blue-600 mt-1">
+                    Ring height automatically set to {brandHeights[inputs.brand as keyof typeof brandHeights]}mm for {inputs.brand.charAt(0).toUpperCase() + inputs.brand.slice(1)}
+                  </p>
+                )}
               </div>
 
               {/* Measurement Inputs */}
@@ -129,6 +152,7 @@ const WireCalculator = () => {
                     type="number"
                     min="0"
                     step="0.1"
+                    value={inputs.bendHeight || ''}
                     className="h-12 border-2 border-gray-200 focus:border-blue-500 transition-colors"
                     placeholder="Enter bend height"
                     onChange={(e) => handleInputChange('bendHeight', e.target.value)}
