@@ -97,7 +97,7 @@ const WireCalculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -282,7 +282,7 @@ const WireCalculator = () => {
           </Card>
 
           {/* Cutlery Partition Table */}
-          {inputs.brand && cutleryData[inputs.brand as keyof typeof cutleryData].length > 0 && (
+          {inputs.brand && cutleryData[inputs.brand as keyof typeof cutleryData]?.length > 0 && (
             <Card className="shadow-xl border-0 bg-white/80 backdrop-blur">
               <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-t-lg">
                 <CardTitle className="flex items-center gap-2">
