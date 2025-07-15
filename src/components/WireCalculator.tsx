@@ -66,7 +66,12 @@ const WireCalculator = () => {
       { size: '19"', partitions: [{ length: 366, qty: 1 }, { length: 350, qty: 1 }, { length: 491, qty: 1 }] },
       { size: '21"', partitions: [{ length: 366, qty: 1 }, { length: 386, qty: 1 }, { length: 491, qty: 1 }] }
     ],
-    'godrej': [],
+    'godrej': [
+      { size: '15"x20"', partitions: [{ length: 472, qty: 1 }, { length: 240, qty: 1 }, { length: 338, qty: 1 }] },
+      { size: '17"x20"', partitions: [{ length: 472, qty: 1 }, { length: 270, qty: 1 }, { length: 338, qty: 1 }] },
+      { size: '19"x20"', partitions: [{ length: 472, qty: 1 }, { length: 338, qty: 3 }] },
+      { size: '21"x20"', partitions: [{ length: 338, qty: 2 }, { length: 379, qty: 1 }, { length: 472, qty: 1 }] }
+    ],
     'higloss': []
   };
 
