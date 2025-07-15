@@ -53,6 +53,23 @@ const WireCalculator = () => {
     'pluss': 30
   };
 
+  const cutleryData = {
+    'lifetime': [
+      { size: '15"', partitions: [{ length: 366, qty: 3 }] },
+      { size: '17"', partitions: [{ length: 366, qty: 2 }, { length: 471, qty: 1 }] },
+      { size: '19"', partitions: [{ length: 366, qty: 1 }, { length: 350, qty: 1 }, { length: 491, qty: 1 }] },
+      { size: '21"', partitions: [{ length: 366, qty: 1 }, { length: 386, qty: 1 }, { length: 491, qty: 1 }] }
+    ],
+    'pluss': [
+      { size: '15"', partitions: [{ length: 366, qty: 3 }] },
+      { size: '17"', partitions: [{ length: 366, qty: 2 }, { length: 471, qty: 1 }] },
+      { size: '19"', partitions: [{ length: 366, qty: 1 }, { length: 350, qty: 1 }, { length: 491, qty: 1 }] },
+      { size: '21"', partitions: [{ length: 366, qty: 1 }, { length: 386, qty: 1 }, { length: 491, qty: 1 }] }
+    ],
+    'godrej': [],
+    'higloss': []
+  };
+
   const handleInputChange = (field: keyof CalculationInputs, value: string | number) => {
     if (field === 'brand') {
       const brandKey = value.toString().toLowerCase();
@@ -87,7 +104,7 @@ const WireCalculator = () => {
           <p className="text-gray-600 text-lg">Professional wire and sheet size calculator for manufacturing</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
           {/* Input Section */}
           <Card className="shadow-xl border-0 bg-white/80 backdrop-blur">
             <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg">
@@ -258,6 +275,39 @@ const WireCalculator = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Cutlery Partition Table */}
+          {inputs.brand && cutleryData[inputs.brand as keyof typeof cutleryData].length > 0 && (
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur">
+              <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-t-lg">
+                <CardTitle className="flex items-center gap-2">
+                  <Calculator className="w-5 h-5" />
+                  Cutlery Partition Table
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  {cutleryData[inputs.brand as keyof typeof cutleryData].map((cutlery, index) => (
+                    <div key={index} className="border border-gray-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-800 mb-3">{cutlery.size} Cutlery</h4>
+                      <div className="space-y-2">
+                        {cutlery.partitions.map((partition, partIndex) => (
+                          <div key={partIndex} className="flex justify-between items-center bg-gray-50 p-3 rounded">
+                            <span className="text-sm font-medium text-gray-700">
+                              Length: {partition.length}mm
+                            </span>
+                            <span className="text-sm font-bold text-blue-600">
+                              Qty: {partition.qty}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Footer */}
